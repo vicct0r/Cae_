@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2 class="btn-warning">Tem certeza que deseja apagar o aluno?</h2>
+<form action="." method="post">
+    {% csrf_token %}
+    <input type="submit" value="Sim, tenho certeza">
+</form>
+{% endblock %}
