@@ -1,8 +1,7 @@
-from django import forms 
 from django.contrib.auth.forms import UserCreationForm
-from .models import Aluno
+from .models import Conta
 
-class CadastroAlunoForm(UserCreationForm):
+class CadastroUsuarioForm(UserCreationForm):
     class Meta:
-        model = Aluno
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        model = Conta
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'cargo']

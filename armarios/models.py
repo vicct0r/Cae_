@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from usuarios.models import Conta 
 from django.utils import timezone
 
 class Armario(models.Model):
@@ -10,7 +10,7 @@ class Armario(models.Model):
         return self.chave_string
 
 class Emprestimo(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Conta, on_delete=models.CASCADE)
     armario = models.ForeignKey(Armario, on_delete=models.CASCADE)
     data_emprestimo = models.DateTimeField('Data do Emprestimo', null=True, blank=True)
     data_devolucao = models.DateTimeField('Data de Devolução', null=True, blank=True)
@@ -31,3 +31,6 @@ class Emprestimo(models.Model):
         self.armario.save()
         self.save()
 
+    # Lembrar de implementar o método tempo_restante() 
+    # Isso vai me permitir ter controle do prazo de devolução do estudante
+    # Vai ser o responsável por aplicar as multas também

@@ -17,41 +17,54 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{% url 'index' %}">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{% url 'lista_armarios' %}">Armários</a>
-                    </li>
-                    {% if user|has_role:'aluno' %}
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'index' %}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'lista_armarios' %}">Armários</a>
+                </li>
+                
+                <!-- Menu para Alunos -->
+                {% if user|has_role:'aluno' %}
                     <li class="nav-item">
                         <a class="nav-link text-light" href="">Meu Perfil</a>
                     </li>
-                    {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Atendimento</a>
+                        <a class="nav-link text-light" href="">Atendimento</a>
+                    </li>
+                
+                <!-- Menu para Professores -->
+                {% elif user|has_role:'professor' %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'listagem_alunos' %}">Admin</a>
                     </li>
                     <li class="nav-item">
-                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Sair</button>
-                        </form>
+                        <a class="nav-link text-light" href="">Atendimento</a>
                     </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{% url 'cadastro_aluno' %}">Registrar</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+                {% endif %}
+                
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Sair</button>
+                    </form>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'cadastro' %}">Registrar</a>
+                </li>
+            {% endif %}
 
-    <main role="main" class="py-4">
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <main role="main" class="py-4">
         {% block content %}
         <!-- Carousel -->
         <div id="carouselExampleIndicators" class="carousel slide">
@@ -68,7 +81,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Main Content -->
         <div class="container mt-4">
             <div class="row">
