@@ -3,10 +3,9 @@
 
 {% block content %}
 <div class="container text-center">
-    <p><strong>Nome Completo:</strong> {{ aluno.conta.get_full_name }}</p>
-    <p><strong>Nome de Usuário:</strong> {{ aluno.conta.username }}</p>
-    <p><strong>Email:</strong> {{ aluno.conta.email }}</p>
-    <p><strong>Função:</strong> {{ aluno.conta.cargo }}</p>
-
+    <p><strong>Nome Completo:</strong> {{ aluno.usuario.nome_completo }}</p>
+    <p><strong>Nome de Usuário:</strong> {{ aluno.usuario.username }}</p>
+    <p><strong>Curso:</strong> {{ aluno.curso }}</p>
+    <p><strong>Função:</strong> {{ aluno.usuario.cargo }}</p>
 </div>
 {% endblock %}

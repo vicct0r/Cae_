@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^vcr(5wc*v=foepb#0$)5#q_19kkn-r(l=pt*%hli7dn24n)6e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -113,7 +113,7 @@ ROLEPERMISSIONS_MODULE = 'usuarios.roles'
 
 # configuração para as rotas do login/logout
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'redirect'
 LOGOUT_REDIRECT_URL = 'index'
 
 # Internationalization

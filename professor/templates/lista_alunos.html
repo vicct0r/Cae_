@@ -9,23 +9,28 @@
             <tr>
                 <th>ID</th>
                 <th>Nome Completo</th>
-                <th>Email</th>
+                <th>curso</th>
                 <th>Ações</th> <!-- Coluna para os botões -->
             </tr>
         </thead>
         <tbody>
             {% for aluno in alunos %}
             <tr id="row{{ aluno.id }}">
-                <td>{{ aluno.conta.id }}</td>
-                <td>{{ aluno.conta.get_full_name }}</td>
-                <td>{{ aluno.conta.email }}</td>
+                <td>{{ aluno.usuario.id }}</td>
+                <td><a href="{% url 'detalhe_aluno' aluno.id %}">{{ aluno.usuario.nome_completo }}</a></td>
+                <td>{{ aluno.curso }}</td>
                 <td>
-                    <a href="{% url 'detalhe_aluno' aluno.id %}" class="btn btn-warning btn-sm">Detalhe</a>
-                    <a href="{% url 'editar_aluno' aluno.id %}" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="{% url 'deletar_aluno' aluno.id %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="Apagar" class="btn btn-warning btn-sm">
-                    </form>
+                    <div class="row">
+                        <div class="col-auto">
+                            <a href="{% url 'editar_aluno' aluno.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        </div>
+                        <div class="col-auto">
+                            <form action="{% url 'deletar_aluno' aluno.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" value="Apagar" class="btn btn-danger btn-sm">
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
             {% endfor %}

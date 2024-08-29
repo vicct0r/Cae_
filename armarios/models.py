@@ -16,7 +16,7 @@ class Emprestimo(models.Model):
     data_devolucao = models.DateTimeField('Data de Devolução', null=True, blank=True)
 
     def __str__(self):
-        return f'Armário: {self.id} -- Aluno: {self.usuario.first_name}'
+        return f'Armário: {self.id} - Aluno: {self.usuario.username}'
 
     def emprestar(self):
         self.armario.disponivel = False

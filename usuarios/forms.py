@@ -1,7 +1,27 @@
-from django.contrib.auth.forms import UserCreationForm
-from .models import Conta
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import Conta, AlunoModel, ProfessorModel
+
 
 class CadastroUsuarioForm(UserCreationForm):
     class Meta:
         model = Conta
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'cargo']
+        fields = ['username','nome_completo', 'password1', 'password2', 'cargo']
+
+
+class CadastroUsuarioChangeForm(UserChangeForm):
+    class meta:
+        model = Conta
+        fields = ['username', 'nome_completo']
+
+
+class AlunoForm(forms.ModelForm):
+    class Meta:
+        model = AlunoModel
+        fields = ['curso']
+
+
+class ProfessorForm(forms.ModelForm):
+    class Meta:
+        model = ProfessorModel
+        fields = ['especialidade']
