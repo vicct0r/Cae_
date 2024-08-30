@@ -18,10 +18,10 @@ class CadastroUsuarioChangeForm(UserChangeForm):
 class AlunoForm(forms.ModelForm):
     class Meta:
         model = AlunoModel
-        fields = ['curso']
+        fields = ['img', 'curso', 'turno']
 
 
 class ProfessorForm(forms.ModelForm):
     class Meta:
         model = ProfessorModel
-        fields = ['especialidade']
+        fields = ['img', 'especialidade']
