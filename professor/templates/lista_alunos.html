@@ -4,12 +4,20 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Alunos</h2>
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">
+                <strong>{{ message }}</strong>
+            </div>
+        {% endif %}
+    {% endfor %}
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nome Completo</th>
                 <th>curso</th>
+                <th>Turno</th>
                 <th>Ações</th> <!-- Coluna para os botões -->
             </tr>
         </thead>
@@ -19,6 +27,7 @@
                 <td>{{ aluno.usuario.id }}</td>
                 <td><a href="{% url 'detalhe_aluno' aluno.id %}">{{ aluno.usuario.nome_completo }}</a></td>
                 <td>{{ aluno.curso }}</td>
+                <td>{{ aluno.turno }}</td>
                 <td>
                     <div class="row">
                         <div class="col-auto">
@@ -36,14 +45,5 @@
             {% endfor %}
         </tbody>
     </table>
-    {% if messages %}
-        <div class="alert-container">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-        </div>
-    {% endif %}
 </div>
 {% endblock %}

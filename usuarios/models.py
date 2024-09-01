@@ -93,3 +93,17 @@ class ProfessorModel(models.Model):
         verbose_name = 'Professor'
         verbose_name_plural = 'Professores'
 
+
+
+"""
+Por algum motivo consegui fazer com que o upload de imagens funcionasse para ambos usuários;
+Agora precisamos do seguinte:
+
+-Fazer com que o professor também tenha um 'Meu_pefil'
+-Fazer implementação de regra que não permite usuario de pegar mais de um armário por vez
+-Fazer com que  o usuário tome multa se não devolver o armário
+-Fazer a parte de atendimento do usuário
+-Procurar a pasta de Registro e Login para alterar o template de ambos
+-Fazer Atendimento ficar pronto e funcional para ambos os lados
+-APRENDER USAR MESSAGES PARA INTEGRAR NO SITE INTEIRO
+"""
