@@ -24,7 +24,6 @@ class Emprestimo(models.Model):
         self.armario.save()
         self.save()
 
-
     def devolver(self):
         self.armario.disponivel = True
         self.data_devolucao = timezone.now()

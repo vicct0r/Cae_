@@ -1,3 +1,4 @@
+{% load static %}
 {% load permission_tags %}
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -24,12 +25,12 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="{% url 'lista_armarios' %}">Armários</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'my_profile' pk=user.pk %}">Meu Perfil</a>
+                </li>
                 
                 <!-- Menu para Alunos -->
                 {% if user|has_role:'aluno' %}
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="">Meu Perfil</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="">Atendimento</a>
                     </li>

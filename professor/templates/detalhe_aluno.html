@@ -1,11 +1,25 @@
 {% extends 'index.html' %}
-{% block title %}Ficha {{ aluno.first_name }}{% endblock %}
+{% block title %}Ficha {{ aluno.usuario.nome_completo }}{% endblock %}
 
 {% block content %}
-<div class="container text-center">
-    <p><strong>Nome Completo:</strong> {{ aluno.usuario.nome_completo }}</p>
-    <p><strong>Nome de Usuário:</strong> {{ aluno.usuario.username }}</p>
-    <p><strong>Curso:</strong> {{ aluno.curso }}</p>
-    <p><strong>Função:</strong> {{ aluno.usuario.cargo }}</p>
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 700px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div class="card-body text-center">
+            <!-- Imagem de Perfil 460x460 -->
+            <img src="{{ aluno.img.url }}" alt="Foto de Perfil" class="mb-4" style="width: 460px; height: 460px; object-fit: cover; border: 2px solid #ddd; border-radius: 10px;">
+
+            
+            <!-- Informações do Aluno -->
+            <h3 class="card-title">{{ aluno.usuario.nome_completo }}</h3>
+            <p class="text-muted">@{{ aluno.usuario.username }}</p>
+
+            <hr class="my-4">
+
+            <p><strong>Curso:</strong> {{ aluno.curso }}</p>
+            <p><strong>Função:</strong> {{ aluno.usuario.cargo }}</p>
+
+
+        </div>
+    </div>
 </div>
 {% endblock %}
