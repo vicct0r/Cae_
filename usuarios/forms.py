@@ -10,10 +10,13 @@ class CadastroUsuarioForm(UserCreationForm):
 
 
 class CadastroUsuarioChangeForm(UserChangeForm):
-    class meta:
+    class Meta:
         model = Conta
         fields = ['username', 'nome_completo']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields.pop('password')  # Remove o campo de senha
 
 class AlunoForm(forms.ModelForm):
     class Meta:

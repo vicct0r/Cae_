@@ -38,6 +38,7 @@ class CadastroUsuarioView(CreateView):
             user.is_funcionario = True
             assign_role(user, 'professor')
             ProfessorModel.objects.create(usuario=user)
+        user.save() # preciso disso aqui pra salvar is_funcionario
         return response
 
 
