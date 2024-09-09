@@ -33,12 +33,12 @@ class CadastroUsuarioView(CreateView):
         user = self.object
 
         if '@' in user.username:
-            assign_role(user, 'aluno')
-            AlunoModel.objects.create(usuario=user)
-        if user.cargo == 'professor':
             user.is_funcionario = True
             assign_role(user, 'professor')
             ProfessorModel.objects.create(usuario=user)
+        else:
+            assign_role(user, 'aluno')
+            AlunoModel.objects.create(usuario=user)
         user.save() # preciso disso aqui pra salvar is_funcionario
         return response
 

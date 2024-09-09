@@ -63,7 +63,7 @@ class MyProfileUpdateView(LoginRequiredMixin, UserProfilePictureMixin, UpdateVie
         user = self.request.user
 
         # fazendo os dois retornos possíveis de formulário
-        if user.cargo == 'professor':
+        if user.is_funcionario:
             return ProfessorUpdateForm
         return AlunoUpdateForm
 
@@ -71,7 +71,7 @@ class MyProfileUpdateView(LoginRequiredMixin, UserProfilePictureMixin, UpdateVie
         user = self.request.user # retornando o usuario logado
 
         # especificando o usuário correto para alteração dos dados
-        if user.cargo == 'professor':
+        if user.is_funcionario:
             return ProfessorModel.objects.get(usuario=user)
         return AlunoModel.objects.get(usuario=user)
 

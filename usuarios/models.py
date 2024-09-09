@@ -45,7 +45,7 @@ class AlunoModel(models.Model):
     img = StdImageField(
                         'Imagem', 
                         upload_to=get_file_path, 
-                        variations={'thumb':{'width':460, 'height':460, 'crop':True}},
+                        variations={'thumb':{'width':360, 'height':360, 'crop':True}},
                         default='default/default_user.avif'
     )
     turno = models.CharField('Turno', max_length=18, choices=TURNO_CHOICES,  default='#')
@@ -82,7 +82,7 @@ class ProfessorModel(models.Model):
     img = StdImageField(
                         'Imagem', 
                         upload_to=get_file_path, 
-                        variations={'thumb':{'width':460, 'height':460, 'crop':True}},
+                        variations={'thumb':{'width':360, 'height':360, 'crop':True}},
                         default='default/default_user.avif'
     )
 
