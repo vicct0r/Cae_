@@ -1,27 +1,37 @@
 from django.shortcuts import render
 from usuarios.models import AlunoModel, Conta
+from usuarios.mixins import UserProfilePictureMixin
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 from rolepermissions.mixins import HasRoleMixin
+from armarios.models import Emprestimo
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from usuarios.roles import Professor
 
-class ListagemAlunos(LoginRequiredMixin, HasRoleMixin, ListView):
+class ListagemAlunos(LoginRequiredMixin, UserProfilePictureMixin, HasRoleMixin, ListView):
     allowed_roles = 'professor'
     template_name = 'lista_alunos.html'
     model = AlunoModel
     context_object_name = 'alunos'
 
 
-class DetalheAluno(LoginRequiredMixin, HasRoleMixin, DetailView):
+class DetalheAluno(LoginRequiredMixin, UserProfilePictureMixin, HasRoleMixin, DetailView):
     allowed_roles = 'professor'
     template_name = 'detalhe_aluno.html'
     model = AlunoModel
     context_object_name = 'aluno'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
 
-class EditarAlunoView(LoginRequiredMixin, HasRoleMixin, UpdateView):
+        emprestimo = Emprestimo.objects.filter(usuario=user)
+        context['emprestimo'] = emprestimo
+        return context
+
+
+class EditarAlunoView(LoginRequiredMixin, UserProfilePictureMixin, HasRoleMixin, UpdateView):
     allowed_roles = 'professor'
     template_name = 'editar_aluno.html'
     model = AlunoModel

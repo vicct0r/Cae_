@@ -6,7 +6,7 @@ from .models import Conta, AlunoModel, ProfessorModel
 class CadastroUsuarioForm(UserCreationForm):
     class Meta:
         model = Conta
-        fields = ['username','nome_completo', 'password1', 'password2', 'cargo']
+        fields = ['username','nome_completo', 'password1', 'password2']
 
 
 class CadastroUsuarioChangeForm(UserChangeForm):

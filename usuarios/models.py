@@ -16,7 +16,7 @@ class Conta(AbstractUser):
         ('aluno', 'Aluno'),
         ('professor', 'Professor'),
     )
-    cargo = models.CharField('função', max_length=10, choices=CHOICES)
+    multado = models.BooleanField('Multado', default=False)
     nome_completo = models.CharField('Nome Completo', max_length=40)
     is_ativo = models.BooleanField('Ativo?', default=False, editable=False)
     is_funcionario = models.BooleanField('Funcionario?', default=False, editable=False)
@@ -31,8 +31,8 @@ class Conta(AbstractUser):
 
 class AlunoModel(models.Model):
     TURNO_CHOICES = (
-        ('horario_integral', 'Horario Integral'),
-        ('noturno', 'Noturno')
+        ('Horário Integral', 'Horario Integral'),
+        ('Noturno', 'Noturno')
     )
     CURSO_CHOICES = (
         ('BCC', 'Ciencia da Computação'),

@@ -15,6 +15,7 @@ class Emprestimo(models.Model):
     data_emprestimo = models.DateTimeField('Data do Emprestimo', null=True, blank=True)
     data_devolucao = models.DateTimeField('Data de Devolução', null=True, blank=True)
 
+
     def __str__(self):
         return f'Armário: {self.id} - Aluno: {self.usuario.username}'
 
@@ -29,6 +30,19 @@ class Emprestimo(models.Model):
         self.data_devolucao = timezone.now()
         self.armario.save()
         self.save()
+
+    # testar isso aqui depois de ter implementado multa no sistema
+    def prazo_devolucao(self):
+        prazo_limite = self.data_emprestimo + timezone.timedelta(hours=24)
+        tempo_restante = prazo_limite - timezone.now()
+
+        if tempo_restante > timezone.timedelta(0):
+            dias = tempo_restante.days
+            horas, segundos = divmod(tempo_restante.seconds, 3600)
+            minutos, segundos = divmod(segundos, 60)
+            return f"{dias} dias, {horas} horas, {minutos} minutos"
+        else:
+            return "A devolução está atrasada!"
 
     # Lembrar de implementar o método tempo_restante() 
     # Isso vai me permitir ter controle do prazo de devolução do estudante

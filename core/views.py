@@ -1,27 +1,31 @@
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from armarios.models import Emprestimo
 from django.views.generic import TemplateView, UpdateView, DetailView
 from usuarios.forms import CadastroUsuarioChangeForm
 from rolepermissions.mixins import HasRoleMixin
+from usuarios.mixins import UserProfilePictureMixin
 from django.urls import reverse, reverse_lazy
 from usuarios.models import ProfessorModel, AlunoModel, Conta
 from .forms import ProfessorUpdateForm, AlunoUpdateForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class IndexView(TemplateView):
+class IndexView(UserProfilePictureMixin, TemplateView):
     template_name = 'index.html'
 
 
-class MyProfileView(LoginRequiredMixin, DetailView):
+class MyProfileView(LoginRequiredMixin, UserProfilePictureMixin, DetailView):
     template_name = 'my_profile.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        print(user.is_funcionario)
-        if user.cargo == 'professor':
+
+        context['emprestimo'] = Emprestimo.objects.filter(usuario=user)
+
+        if user.is_funcionario:
             profile = ProfessorModel.objects.get(usuario=user)
         else:
             profile = AlunoModel.objects.get(usuario=user)
@@ -33,7 +37,7 @@ class MyProfileView(LoginRequiredMixin, DetailView):
         return self.request.user
 
 
-class MyAccountUpdateView(LoginRequiredMixin, UpdateView):
+class MyAccountUpdateView(LoginRequiredMixin, UserProfilePictureMixin, UpdateView):
     template_name = 'my_account_update.html'
     form_class = CadastroUsuarioChangeForm
 
@@ -50,7 +54,7 @@ class MyAccountUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('my_profile', kwargs={'pk': user_pk})
 
 
-class MyProfileUpdateView(LoginRequiredMixin, UpdateView):
+class MyProfileUpdateView(LoginRequiredMixin, UserProfilePictureMixin, UpdateView):
     template_name = 'my_profile_update.html'
     success_url = reverse_lazy('my_profile')
     # form_class está fora desta parte pois eu preciso de uma condição para escolher o formulário.

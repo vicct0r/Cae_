@@ -18,7 +18,7 @@ class UsuarioContaAdmin(UserAdmin):
     add_form = CadastroUsuarioForm
     form = CadastroUsuarioChangeForm
     model = Conta
-    list_display = ['username', 'nome_completo', 'is_ativo', 'cargo']
+    list_display = ['username', 'nome_completo', 'is_ativo', 'multado']
 
 
 

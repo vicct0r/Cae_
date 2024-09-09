@@ -18,6 +18,7 @@
             </div>
         {% endif %}
         {% endfor %}
+        
         <!-- Sidebar com a foto do perfil -->
         <div class="col-md-4 text-center">
             <div class="card">
@@ -47,6 +48,18 @@
                     {% else %}
                         <p><strong>Curso:</strong> {{ profile.curso }}</p>
                         <p><strong>Turno:</strong> {{ profile.turno }}</p>
+                    {% endif %}
+                    
+                    <!-- Verificação de empréstimo -->
+                    <h5 class="mt-4">Chave: </h5>
+                    {% if emprestimo.exists %}
+                        <ul>
+                            {% for emp in emprestimo %}
+                                <li><strong>Prazo restante:</strong> {{ emp.prazo_devolucao }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">Você não possui nenhum empréstimo no momento.</p>
                     {% endif %}
                 </div>
                 <div class="card-footer">
