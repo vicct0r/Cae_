@@ -31,7 +31,7 @@ class Emprestimo(models.Model):
         self.armario.save()
         self.save()
 
-    # testar isso aqui depois de ter implementado multa no sistema
+    # lembrar de testar isso aqui depois de ter implementado multa no sistema
     def prazo_devolucao(self):
         prazo_limite = self.data_emprestimo + timezone.timedelta(hours=24)
         tempo_restante = prazo_limite - timezone.now()
@@ -42,8 +42,5 @@ class Emprestimo(models.Model):
             minutos, segundos = divmod(segundos, 60)
             return f"{dias} dias, {horas} horas, {minutos} minutos"
         else:
+            # posso aplicar multa para user aqui dentro.
             return "A devolução está atrasada!"
-
-    # Lembrar de implementar o método tempo_restante() 
-    # Isso vai me permitir ter controle do prazo de devolução do estudante
-    # Vai ser o responsável por aplicar as multas também
