@@ -8,7 +8,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     {% if livro.foto_livro %}
-                        <img src="{{ livro.foto_livro.thumb.url }}" class="card-img-top" alt="{{ livro.nome }}" style="object-fit: cover; height: 300px;">
+                        <img src="{{ livro.foto_livro.url }}" class="card-img-top" alt="{{ livro.nome }}" style="object-fit: cover; height: 300px;">
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ livro.nome }}</h5>
