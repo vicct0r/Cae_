@@ -7,21 +7,25 @@
     <div class="row">
         <div class="col-md-4">
             <!-- Imagem da logo do evento -->
-            <img src="{{ evento.logo.url }}" alt="Logo do Evento" class="img-fluid rounded shadow-sm">
+            {% if evento.logo %}
+            <img src="{{ evento.logo.url }}" alt="Logo" class="img-fluid mx-auto d-block">
+            {% else %}
+            <p>Sem logo disponível</p>
+            {% endif %}
         </div>
         <div class="col-md-8">
             <!-- Informações do evento -->
             <h2>{{ evento.nome }}</h2>
-            <p><strong>Status:</strong> {{ evento.get_status_display }}</p>
+            <p><strong>Status:</strong> <span class="text-success"> {{ evento.get_status_display }}</span></p>
             <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
             <p><strong>Local:</strong> {{ evento.local }}</p>
             <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y H:i" }}</p>
             <p><strong>Duração:</strong> {{ evento.duracao }}</p>
-            <p><strong>Palestrantes:</strong> 
+            <p><strong>Palestrantes:</strong>
                 {% if evento.palestrantes.exists %}
-                    {{ evento.palestrantes.all|join:", " }}
+                {{ evento.palestrantes.all|join:", " }}
                 {% else %}
-                    Não há palestrantes cadastrados.
+                Não há palestrantes cadastrados.
                 {% endif %}
             </p>
         </div>

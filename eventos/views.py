@@ -36,6 +36,7 @@ class EventoCreateView(LoginRequiredMixin, HasRoleMixin, CreateView):
 
 class EventoEditView(LoginRequiredMixin, HasRoleMixin, UpdateView):
     allowed_roles = 'professor'
+    queryset = Evento.objects.all()
     template_name = 'evento_update.html'
     form_class = EventoForm
     success_url = reverse_lazy('evento_admin')

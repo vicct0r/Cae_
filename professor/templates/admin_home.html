@@ -7,10 +7,10 @@
 <div class="container py-4 mb-5">
     <h1 class="mb-4">Painel de Administração</h1>
 
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- Card para Alunos -->
-        <div class="col-md-4">
-            <div class="card text-center mb-4" style="width: 18rem;" >
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card text-center">
                 <img src="{% static 'images/discussion.png' %}" class="card-img-top icon-size" alt="Imagem de Alunos">
                 <div class="card-body">
                     <h5 class="card-title">Gerenciar Alunos</h5>
@@ -23,28 +23,42 @@
         </div>
 
         <!-- Card para Eventos -->
-        <div class="col-md-4">
-            <div class="card text-center mb-4" style="width: 18rem;" >
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card text-center">
                 <img src="{% static 'images/memo.png' %}" class="card-img-top icon-size" alt="Imagem de Eventos">
                 <div class="card-body">
                     <h5 class="card-title">Gerenciar Eventos</h5>
                     <div class="d-grid gap-2">
                         <a href="{% url 'evento_admin' %}" class="btn btn-primary">Listar Eventos</a>
-                        <a href="" class="btn btn-success">Adicionar Novo Evento</a>
+                        <a href="{% url 'evento_create' %}" class="btn btn-success">Adicionar Novo Evento</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Card para Armários -->
-        <div class="col-md-4">
-            <div class="card text-center mb-4" style="width: 18rem;" >
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card text-center">
                 <img src="{% static 'images/lockers.png' %}" class="card-img-top icon-size" alt="Imagem de Armários">
                 <div class="card-body">
                     <h5 class="card-title">Gerenciar Armários</h5>
                     <div class="d-grid gap-2">
                         <a href="{% url 'lista_armarios' %}" class="btn btn-primary">Listar Armários</a>
                         <a href="" class="btn btn-success">Adicionar Novo Armário</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card para Livros -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card text-center">
+                <img src="{% static 'images/book.png' %}" class="card-img-top icon-size" alt="Imagem de Livros">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciar Livros</h5>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'livros' %}" class="btn btn-primary">Listar Livros</a>
+                        <a href="{% url 'livros_add' %}" class="btn btn-success">Adicionar Novo Livro</a>
                     </div>
                 </div>
             </div>
