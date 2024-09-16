@@ -6,6 +6,7 @@ from usuarios.mixins import UserProfilePictureMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 
+
 class ArmariosView(LoginRequiredMixin, UserProfilePictureMixin, ListView):
     template_name = 'listagem_armarios.html'
     model = Armario
