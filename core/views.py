@@ -2,10 +2,13 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from armarios.models import Emprestimo
-from django.views.generic import TemplateView, UpdateView, DetailView
+from django.views.generic import TemplateView, UpdateView, DetailView, ListView, CreateView
 from usuarios.forms import CadastroUsuarioChangeForm
 from rolepermissions.mixins import HasRoleMixin
 from usuarios.mixins import UserProfilePictureMixin
+from eventos.models import Evento
+from .models import Livros
+from .forms import LivrosModelForm
 from django.urls import reverse, reverse_lazy
 from usuarios.models import ProfessorModel, AlunoModel, Conta
 from .forms import ProfessorUpdateForm, AlunoUpdateForm
@@ -15,7 +18,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class IndexView(UserProfilePictureMixin, TemplateView):
     template_name = 'index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['eventos'] = Evento.objects.all()
+        return context
 
+
+# Sessão de Usuário
 class MyProfileView(LoginRequiredMixin, UserProfilePictureMixin, DetailView):
     template_name = 'my_profile.html'
     
@@ -86,3 +95,24 @@ class MyProfileUpdateView(LoginRequiredMixin, UserProfilePictureMixin, UpdateVie
     def get_success_url(self):
         user_pk = self.object.pk
         return reverse('my_profile', kwargs={'pk': user_pk})
+
+# Sessão de Livros
+class LivrosPDF(ListView):
+    template_name = 'livros.html'
+    model = Livros
+    context_object_name = 'livros'
+
+
+class LivrosCreate(LoginRequiredMixin, HasRoleMixin, CreateView):
+    allowed_roles = 'professor'
+    template_name = 'livro_add.html'
+    form_class = LivrosModelForm
+    success_url = reverse_lazy('livros')
+
+
+class LivroUpdate(LoginRequiredMixin, HasRoleMixin, UpdateView):
+    allowed_roles = 'professor'
+    template_name = 'livro_update.html'
+    queryset = Livros.objects.all()
+    form_class = LivrosModelForm
+    success_url = reverse_lazy('livros')

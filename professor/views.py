@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from usuarios.models import AlunoModel, Conta
 from usuarios.mixins import UserProfilePictureMixin
-from django.views.generic import ListView, DetailView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView, DeleteView, UpdateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.mixins import HasRoleMixin
 from armarios.models import Emprestimo
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from usuarios.roles import Professor
+
+
+class AdminProfessores(LoginRequiredMixin, HasRoleMixin, TemplateView):
+    allowed_roles = 'professor'
+    template_name = 'admin_home.html'
+
 
 class ListagemAlunos(LoginRequiredMixin, UserProfilePictureMixin, HasRoleMixin, ListView):
     allowed_roles = 'professor'
