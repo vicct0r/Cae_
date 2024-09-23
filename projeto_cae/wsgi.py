@@ -8,11 +8,9 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
 
 import os
-from dj_static import Cling, MediaCling
 
-from dj_static import Cling, MediaCling # Servidor WSGI 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto_cae.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto_cae.settings.dev')
 
-application = Cling(MediaCling(get_wsgi_application()))
+application = get_wsgi_application()
